@@ -1,0 +1,72 @@
+/*
+ * index.css
+ * ─────────
+ * Tailwind directives + custom utilities.
+ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    min-height: 100vh;
+    background: #0f172a;
+    color: #fff;
+  }
+
+  /* Smoother scrolling */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@layer utilities {
+  /* Hide scrollbar utility for carousels */
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Custom selection colors */
+::selection {
+  background: rgba(56, 189, 248, 0.3);
+}
+
+/* Temperature toggle alignment fix */
+#temp-unit-toggle {
+  min-width: 92px;
+  overflow: hidden;
+}
+
+#temp-unit-toggle > span:first-child {
+  left: 2px !important;
+  right: auto !important;
+  top: 2px !important;
+  bottom: 2px !important;
+  width: 44px !important;
+}
+
+#temp-unit-toggle > span:nth-child(2),
+#temp-unit-toggle > span:nth-child(3) {
+  min-width: 44px;
+  text-align: center;
+}
