@@ -12,15 +12,11 @@ const firebaseConfig = {
 
 const isFirebaseConfigured = !!firebaseConfig.apiKey;
 
-let app = null;
-let auth = null;
-let googleProvider = null;
+const app = isFirebaseConfigured ? initializeApp(firebaseConfig) : null;
+const auth = isFirebaseConfigured ? getAuth(app) : null;
+const googleProvider = isFirebaseConfigured ? new GoogleAuthProvider() : null;
 
-if (isFirebaseConfigured) {
-  app = initializeApp(firebaseConfig);
-  auth = getAuth(app);
-  googleProvider = new GoogleAuthProvider();
-  // Optional: Set custom parameters like prompt for account selection
+if (googleProvider) {
   googleProvider.setCustomParameters({
     prompt: 'select_account'
   });

@@ -12,7 +12,7 @@ const SevenDayForecast = () => {
   const { dailyForecast, unit } = useWeather();
   if (!dailyForecast?.length) return null;
 
-  const deg = unit === 'metric' ? '°' : '°';
+  const deg = '°';
 
   /* Compute global weekly range to size the bars correctly */
   const weeklyMin = Math.min(...dailyForecast.map(d => d.tempMin));

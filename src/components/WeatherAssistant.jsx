@@ -37,6 +37,7 @@ const WeatherAssistant = () => {
       const response = await askWeatherAssistant(userMsg, currentWeather);
       setMessages((prev) => [...prev, { id: Date.now() + 1, role: 'assistant', content: response }]);
     } catch (error) {
+      console.error('AI Assistant Error:', error);
       setMessages((prev) => [
         ...prev,
         { id: Date.now() + 1, role: 'assistant', content: 'Sorry, I am having trouble connecting right now.' },

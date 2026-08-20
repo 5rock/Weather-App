@@ -5,7 +5,7 @@
  * Manages units, recent cities, and favorite cities.
  */
 
-import { createContext, useState, useEffect, useCallback } from 'react';
+import { createContext, useState, useEffect, useCallback, useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import {
   fetchCurrentWeatherByCoords,
@@ -88,7 +88,7 @@ export const WeatherProvider = ({ children }) => {
     }
   }, []);
 
-  const fetchWeatherByCity = async (cityName) => {
+  const fetchWeatherByCity = useCallback(async (cityName) => {
     try {
       const coords = await fetchCityCoordinates(cityName);
       setTargetLocation(coords);
@@ -97,16 +97,16 @@ export const WeatherProvider = ({ children }) => {
       console.error(err);
       throw err;
     }
-  };
+  }, [addRecentCity]);
 
-  const fetchWeatherByCoords = async (lat, lon) => {
+  const fetchWeatherByCoords = useCallback(async (lat, lon) => {
     try {
       const locInfo = await fetchReverseGeocoding(lat, lon);
       setTargetLocation({ lat, lon, name: locInfo.name });
     } catch {
       setTargetLocation({ lat, lon, name: 'Selected Location' });
     }
-  };
+  }, []);
 
   // Queries
   const { data: currentQuery, isLoading: isCurrentLoading, error: currentError } = useQuery({
@@ -136,26 +136,31 @@ export const WeatherProvider = ({ children }) => {
     uvi: forecastQuery?.current?.uvi
   } : null;
 
+  const value = useMemo(() => ({
+    city: targetLocation?.name || currentWeather?.city,
+    currentWeather,
+    hourlyForecast: forecastQuery?.hourly,
+    dailyForecast: forecastQuery?.daily,
+    airQuality: aqiQuery,
+    loading: !targetLocation || isCurrentLoading || isForecastLoading,
+    error: currentError?.message,
+    unit,
+    recentCities,
+    favoriteCities,
+    fetchWeatherByCity,
+    fetchWeatherByCoords,
+    toggleUnit,
+    clearRecentCities,
+    toggleFavorite,
+  }), [
+    targetLocation?.name, currentWeather, forecastQuery?.hourly, forecastQuery?.daily,
+    aqiQuery, isCurrentLoading, isForecastLoading, currentError?.message, unit,
+    recentCities, favoriteCities, fetchWeatherByCity, fetchWeatherByCoords,
+    toggleUnit, clearRecentCities, toggleFavorite
+  ]);
+
   return (
-    <WeatherContext.Provider
-      value={{
-        city: targetLocation?.name || currentWeather?.city,
-        currentWeather,
-        hourlyForecast: forecastQuery?.hourly,
-        dailyForecast: forecastQuery?.daily,
-        airQuality: aqiQuery,
-        loading: !targetLocation || isCurrentLoading || isForecastLoading,
-        error: currentError?.message,
-        unit,
-        recentCities,
-        favoriteCities,
-        fetchWeatherByCity,
-        fetchWeatherByCoords,
-        toggleUnit,
-        clearRecentCities,
-        toggleFavorite,
-      }}
-    >
+    <WeatherContext.Provider value={value}>
       {children}
     </WeatherContext.Provider>
   );

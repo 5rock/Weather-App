@@ -46,6 +46,7 @@ const Navbar = () => {
         <TemperatureToggle />
         
         <button 
+          type="button"
           onClick={handleThemeCycle}
           className="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 transition-colors flex items-center gap-2 relative"
           aria-label="Toggle Theme"

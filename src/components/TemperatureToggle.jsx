@@ -12,6 +12,7 @@ const TemperatureToggle = () => {
 
   return (
     <button
+      type="button"
       onClick={toggleUnit}
       className="relative flex items-center gap-0 rounded-full bg-slate-200/50 hover:bg-slate-300/50 dark:bg-slate-800/50 dark:hover:bg-slate-700/50
                  transition-all p-0.5 shrink-0 border border-slate-300/30 dark:border-white/10"

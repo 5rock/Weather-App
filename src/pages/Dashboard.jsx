@@ -37,6 +37,14 @@ const Dashboard = () => {
   /* Error */
   if (error && !currentWeather) {
     const isConfigMissing = error === 'CONFIG_MISSING';
+    
+    let errorMessage = error;
+    if (isConfigMissing) {
+      errorMessage = 'Please add your OpenWeatherMap API key to the environment configuration.';
+    } else if (error === 'API_KEY_INVALID') {
+      errorMessage = 'Your API key is invalid or not yet active. (Note: New OpenWeatherMap keys typically take 30-120 minutes to activate).';
+    }
+
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
         <div className="text-center max-w-md glass-panel rounded-3xl p-8">
@@ -45,14 +53,11 @@ const Dashboard = () => {
             {isConfigMissing ? 'Weather service is not configured' : 'Something went wrong'}
           </h2>
           <p className="opacity-60 mb-6 text-sm text-slate-600 dark:text-slate-300">
-            {isConfigMissing 
-              ? 'Please add your OpenWeatherMap API key to the environment configuration.'
-              : error === 'API_KEY_INVALID' 
-                ? 'Your API key is invalid or not yet active. (Note: New OpenWeatherMap keys typically take 30-120 minutes to activate).'
-                : error}
+            {errorMessage}
           </p>
           {!isConfigMissing && (
             <button
+              type="button"
               onClick={() => fetchWeatherByCity('Delhi')}
               className="px-6 py-2.5 rounded-xl bg-sky-500 text-white hover:bg-sky-600 transition font-medium text-sm"
             >

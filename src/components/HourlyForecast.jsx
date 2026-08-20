@@ -12,7 +12,7 @@ const HourlyForecast = () => {
   const { hourlyForecast, unit } = useWeather();
   if (!hourlyForecast?.length) return null;
 
-  const deg = unit === 'metric' ? '°' : '°';
+  const deg = '°';
 
   return (
     <div className="animate-slide-up glass-panel rounded-3xl p-5">

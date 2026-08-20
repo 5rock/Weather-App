@@ -46,6 +46,7 @@ const CurrentWeather = () => {
             </p>
           </div>
           <button 
+            type="button"
             onClick={() => toggleFavorite(city)}
             className={`p-2.5 rounded-full transition-all ${isFavorite ? 'bg-pink-50 dark:bg-pink-500/10 text-pink-500 shadow-sm' : 'bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-pink-500'}`}
             aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}

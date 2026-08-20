@@ -62,7 +62,7 @@ const Account = () => {
           )}
           
           {!user ? (
-            <button 
+            <button type="button" 
               onClick={handleSignIn}
               disabled={isSigningIn}
               className="w-full flex items-center justify-center gap-3 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-700 text-slate-700 dark:text-white py-3.5 rounded-xl font-medium transition-colors border border-slate-100 dark:border-slate-700 shadow-sm disabled:opacity-50 disabled:cursor-not-allowed"
@@ -77,7 +77,7 @@ const Account = () => {
               )}
             </button>
           ) : (
-            <button 
+            <button type="button" 
               onClick={logout}
               className="w-full text-center text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 py-3.5 rounded-xl font-medium transition-colors"
             >
@@ -97,7 +97,7 @@ const Account = () => {
               <span className="font-medium text-slate-700 dark:text-slate-300">Appearance</span>
               <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
                 {['light', 'dark', 'system'].map((t) => (
-                  <button 
+                  <button type="button" 
                     key={t}
                     onClick={() => setTheme(t)}
                     className={`px-4 py-1.5 rounded-md text-sm font-medium capitalize transition-colors ${theme === t ? 'bg-white dark:bg-slate-600 text-sky-500 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
@@ -110,13 +110,13 @@ const Account = () => {
             <div className="flex items-center justify-between p-4 hover:bg-white/50 dark:hover:bg-slate-800/50 rounded-xl transition-colors">
               <span className="font-medium text-slate-700 dark:text-slate-300">Temperature</span>
               <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
-                <button 
+                <button type="button" 
                   onClick={() => unit !== 'metric' && toggleUnit()}
                   className={`px-4 py-1 rounded-md text-sm font-medium transition-colors ${unit === 'metric' ? 'bg-white dark:bg-slate-600 text-sky-500 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
                 >
                   °C
                 </button>
-                <button 
+                <button type="button" 
                   onClick={() => unit === 'metric' && toggleUnit()}
                   className={`px-4 py-1 rounded-md text-sm font-medium transition-colors ${unit !== 'metric' ? 'bg-white dark:bg-slate-600 text-sky-500 dark:text-white shadow-sm' : 'text-slate-500 dark:text-slate-400'}`}
                 >

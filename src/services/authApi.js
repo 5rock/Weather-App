@@ -35,11 +35,9 @@ export const loginWithGoogle = async () => {
     };
   } catch (error) {
     console.error("Firebase Login Error:", error);
-    // Throw an object containing the friendly message
-    throw {
-      code: error.code,
-      message: getFriendlyAuthError(error.code)
-    };
+    const friendlyError = new Error(getFriendlyAuthError(error.code));
+    friendlyError.code = error.code;
+    throw friendlyError;
   }
 };
 

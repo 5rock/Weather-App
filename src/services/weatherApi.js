@@ -29,6 +29,11 @@ export const iconUrl = (code, size = '2x') =>
 /* ─────────────────────────── mock data ─────────────────────────── */
 
 const now = () => Math.floor(Date.now() / 1000);
+const safeRandom = () => {
+  const array = new Uint32Array(1);
+  window.crypto.getRandomValues(array);
+  return array[0] / (0xffffffff + 1);
+};
 
 const mockCities = {
   london: { lat: 51.5074, lon: -0.1278, country: 'GB' },
@@ -78,7 +83,7 @@ const getMockCurrentWeather = (city, units) => {
     tempMax: baseTemp + 4,
     humidity: 58 + (city.length % 15),
     pressure: 1010 + (city.length % 8),
-    wind: isMetric ? +(3 + Math.random() * 4).toFixed(1) : +(7 + Math.random() * 8).toFixed(1),
+    wind: isMetric ? +(3 + safeRandom() * 4).toFixed(1) : +(7 + safeRandom() * 8).toFixed(1),
     description: cond.desc,
     icon: cond.icon,
     main: cond.main,
@@ -103,8 +108,8 @@ const getMockForecast = (units) => {
     temp: Math.round(baseTemp + Math.sin((i - 6) / 3.8) * 6),
     icon: hrIcons[i],
     description: conditions[i % conditions.length].desc,
-    humidity: 50 + Math.round(Math.random() * 25),
-    wind: isMetric ? +(2 + Math.random() * 5).toFixed(1) : +(5 + Math.random() * 10).toFixed(1),
+    humidity: 50 + Math.round(safeRandom() * 25),
+    wind: isMetric ? +(2 + safeRandom() * 5).toFixed(1) : +(5 + safeRandom() * 10).toFixed(1),
   }));
 
   const dayIcons = ['01d', '02d', '03d', '04d', '10d', '02d', '01d'];
@@ -119,9 +124,9 @@ const getMockForecast = (units) => {
     tempMax: Math.round(baseTemp + 4 + (Math.cos(i) * 3)),
     icon: dayIcons[i],
     description: dayDescs[i],
-    humidity: 50 + Math.round(Math.random() * 25),
-    wind: isMetric ? +(2 + Math.random() * 5).toFixed(1) : +(5 + Math.random() * 10).toFixed(1),
-    uvi: +(1 + Math.random() * 9).toFixed(1),
+    humidity: 50 + Math.round(safeRandom() * 25),
+    wind: isMetric ? +(2 + safeRandom() * 5).toFixed(1) : +(5 + safeRandom() * 10).toFixed(1),
+    uvi: +(1 + safeRandom() * 9).toFixed(1),
   }));
 
   return {

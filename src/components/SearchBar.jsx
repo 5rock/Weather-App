@@ -84,12 +84,14 @@ const SearchBar = () => {
         <ul className="absolute top-full left-0 right-0 mt-2 bg-white/90 dark:bg-slate-900/90 backdrop-blur-xl 
                        border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden py-2">
           {suggestions.map((s, idx) => (
-            <li
-              key={`${s.display}-${idx}`}
-              className="px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors dark:text-slate-200"
-              onClick={() => handleSelect(s.name)}
-            >
-              {s.display}
+            <li key={`${s.display}-${idx}`}>
+              <button
+                type="button"
+                className="w-full text-left px-4 py-2.5 text-sm cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors dark:text-slate-200"
+                onClick={() => handleSelect(s.name)}
+              >
+                {s.display}
+              </button>
             </li>
           ))}
         </ul>
