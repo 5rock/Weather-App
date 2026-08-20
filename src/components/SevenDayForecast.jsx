@@ -9,7 +9,7 @@ import useWeather from '../hooks/useWeather';
 import { iconUrl } from '../services/weatherApi';
 
 const SevenDayForecast = () => {
-  const { dailyForecast, unit } = useWeather();
+  const { dailyForecast } = useWeather();
   if (!dailyForecast?.length) return null;
 
   const deg = '°';

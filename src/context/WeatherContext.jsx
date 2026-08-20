@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 /**
  * WeatherContext.jsx
  * ──────────────────
@@ -130,11 +131,10 @@ export const WeatherProvider = ({ children }) => {
     staleTime: 30 * 60 * 1000,
   });
 
-  // Construct context data safely
-  const currentWeather = currentQuery ? {
+  const currentWeather = useMemo(() => currentQuery ? {
     ...currentQuery,
     uvi: forecastQuery?.current?.uvi
-  } : null;
+  } : null, [currentQuery, forecastQuery]);
 
   const value = useMemo(() => ({
     city: targetLocation?.name || currentWeather?.city,
@@ -153,7 +153,7 @@ export const WeatherProvider = ({ children }) => {
     clearRecentCities,
     toggleFavorite,
   }), [
-    targetLocation?.name, currentWeather, forecastQuery?.hourly, forecastQuery?.daily,
+    targetLocation, currentWeather, forecastQuery?.hourly, forecastQuery?.daily,
     aqiQuery, isCurrentLoading, isForecastLoading, currentError?.message, unit,
     recentCities, favoriteCities, fetchWeatherByCity, fetchWeatherByCoords,
     toggleUnit, clearRecentCities, toggleFavorite

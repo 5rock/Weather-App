@@ -9,7 +9,7 @@ import { iconUrl } from '../services/weatherApi';
 import { formatHour } from '../utils/formatDate';
 
 const HourlyForecast = () => {
-  const { hourlyForecast, unit } = useWeather();
+  const { hourlyForecast } = useWeather();
   if (!hourlyForecast?.length) return null;
 
   const deg = '°';
