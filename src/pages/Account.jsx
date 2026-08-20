@@ -72,7 +72,7 @@ const Account = () => {
               ) : (
                 <>
                   <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google" className="w-5 h-5" />
-                  Continue with Google
+                  <span>Continue with Google</span>
                 </>
               )}
             </button>
